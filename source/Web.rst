@@ -45,7 +45,7 @@ Use ``showSDP`` to print current config. It is a json file with 2 layers. By def
     {
         'APP_CONFIG': {
             'WEB_SOCKET': 'ws://localhost:9005/ws', 
-            'TITLE': 'Real-Time Data Panel', 
+            'TITLE': 'Stream Data Panel', 
             'CHART_TYPE': 'ChartType', 
             'KEY_WORD': 'KeyWord', 
             'SUBSCRIBE': 'SUBSCRIBE', 
