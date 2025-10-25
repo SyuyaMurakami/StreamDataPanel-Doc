@@ -170,9 +170,9 @@ Surface is a 3D surface chart. It requires a complicated data form. You should p
 
 The first element is a string list, whose length must be three. It is the name of x-axis, y-axis, z-axis.
 
-The second element is an int list, whose length must be two. It is the shape of your value array, like \[number of rows, number of columns\].
+The second element is an int list, whose length must be two. It is the shape of your value array, like ``[number of rows, number of columns]``.
 
-The third element is the value you want to show. However, it is different as the ordinary rows-columns form. It is a stacked form of your array, like : \[\[x1, y1, z1\], \[x2, y2, z2\], ...\]
+The third element is the value you want to show. However, it is different as the ordinary rows-columns form. It is a stacked form of your array, like : ``[[x1, y1, z1], [x2, y2, z2], ...]``
 
 An example is as follows:
 ::
