@@ -672,7 +672,7 @@ class Area(DataStream):
             {id:xxx, timestamp:xxx, value:[[A, B, C], [1, 2, 3]]}
             - The first element of 'value' is used as x-axis tickers.
             - The second element of 'value' is a list of numbers, representing 
-              the true value at different x-axis tickers.
+            the true value at different x-axis tickers.
 
         """
         if not DataStream._data_validated_dimension(data_payload):
@@ -697,7 +697,7 @@ class Areas(DataStream):
             - The first element of 'value' is used as x-axis tickers.
             - The second element of 'value' is the labels for different data series.
             - The third element of 'value' is a 2D array, representing the true 
-              values for different data series.
+            values for different data series.
 
         """
         if not DataStream._data_validated_dimensions(data_payload):
@@ -722,7 +722,7 @@ class Pie(DataStream):
             {id:xxx, timestamp:xxx, value:[[A, B, C], [1, 2, 3]]}
             - The first element of 'value' is used as labels (categories).
             - The second element of 'value' is a list of numbers, representing 
-              the true value for each label.
+            the true value for each label.
 
         """
         if not DataStream._data_validated_dimension(data_payload):
@@ -747,7 +747,7 @@ class Radar(DataStream):
             - The first element of 'value' is used as dimension labels.
             - The second element of 'value' is the max value at different dimensions.
             - The third element of 'value' is a list of numbers, representing 
-              the true value at different dimensions.
+            the true value at different dimensions.
 
         """
         if not DataStream._data_validated_dimensions(data_payload):
