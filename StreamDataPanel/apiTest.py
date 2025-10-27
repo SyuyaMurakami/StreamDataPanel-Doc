@@ -7,7 +7,19 @@ from datetime import datetime
 from .api import *
 
 def generate_data(chart_type: str):
-    """generate dynamic data according to chart_type"""
+    """
+    Generates dynamic mock data according to the specified chart type.
+
+    Parameters
+    ----------
+    chart_type : str
+        The type of chart requiring data (e.g., 'line', 'sequences', 'surface').
+
+    Returns
+    -------
+    Any
+        A data structure suitable for the given chart type.
+    """
     if chart_type in ['sequence', 'line', 'bar']:
         return round(random.uniform(50, 150), 2)
     elif chart_type in ['sequences', 'lines', 'bars']:
@@ -47,13 +59,33 @@ def generate_data(chart_type: str):
         return None
 
 def simulate(chart, chart_type, num=20000, freq=0.1):
+    """
+    Simulates a continuous data stream by generating data and pushing it 
+    to the chart object with a time delay.
+
+    Parameters
+    ----------
+    chart : DataStream
+        The chart object instance (e.g., Line, Scatter) to which data is pushed.
+    chart_type : str
+        The type of data to generate, matching the chart.
+    num : int, optional
+        The total number of data points to generate. Defaults to 20000.
+    freq : float, optional
+        The time interval (in seconds) between data pushes. Defaults to 0.1s.
+    """
     for i in range(num):
         data = generate_data(chart_type)
         chart.fresh(data)
         time.sleep(freq)
 
 def simulate_all():
-    """API Server must be initialized before call this function."""
+    """
+    Initializes one instance of every available chart type with the keyword 
+    'test' and starts a data simulation thread for each.
+
+    Note: The API Server must be initialized and running before calling this function.
+    """
     chart_obj_list = [Sequence, Line, Bar, Sequences, Lines, Bars, Scatter, Area, Areas, Pie, Radar, Surface]
     key_word_list = ['test' for _ in chart_obj_list]
     chart_type_list = ['sequence', 'line', 'bar', 'sequences', 'lines', 'bars', 'scatter', 'area', 'areas', 'pie', 'radar', 'surface']
