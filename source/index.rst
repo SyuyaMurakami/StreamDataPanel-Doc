@@ -7,8 +7,8 @@
    Home Page <self>
    modules.rst
    Install.rst
-   API.rst
-   Web.rst
+   Usage.rst
+   Config.rst
 
 Welcome to Use StreamDataPanel
 ================================
@@ -25,6 +25,8 @@ StreamDataPanel is designed to **asynchronously transmit data**. A chart can be 
 You can design your own data monitor panel with StreamDataPanel. Every chart in StreamDataPanel can be **dragged to resize or re-locate**. Your design can be saved into local disk, and re-upload to StreamDataPanel next time you want to use it.
 
 StreamDataPanel provides a **user-friendly API**, making it easier to show your data. You do not need to worry about the form of axis tickers or axis value ranges, etc. All you need to do is to give a key word as title of a chart, and pass your data to API, fresh it any time you want.
+
+StreamDataPanel **seperates web app with data server**. You can run your data updating process in one machine and subscribe these charts from others.
 
 Who Can Use StreamDataPanel?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -83,6 +85,8 @@ A web will be opened automatically. Type one of the following words below into `
     surface
     area
     areas
+    text
+    gauge
 
 Then type ``test`` into ``KeyWord`` input. Click ``Subscribe`` to see if it runs correctly. If You see a chart with data freshed every second, it means success.
 

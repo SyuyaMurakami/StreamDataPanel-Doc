@@ -55,6 +55,10 @@ def generate_data(chart_type: str):
         axis = ["moneyness", "dte", "vega"]
         shape = [len(xRange), len(yRange)]
         return [axis, shape, zValues]
+    elif chart_type == 'text':
+        return f'You have a text:\n {random.uniform(0,1)*50}'
+    elif chart_type == 'gauge':
+        return ['Delta', [-1.0, 1.0], random.uniform(-1,1)]
     else:
         return None
 
@@ -86,9 +90,9 @@ def simulate_all():
 
     Note: The API Server must be initialized and running before calling this function.
     """
-    chart_obj_list = [Sequence, Line, Bar, Sequences, Lines, Bars, Scatter, Area, Areas, Pie, Radar, Surface]
+    chart_obj_list = [Sequence, Line, Bar, Sequences, Lines, Bars, Scatter, Area, Areas, Pie, Radar, Surface, Text, Gauge]
     key_word_list = ['test' for _ in chart_obj_list]
-    chart_type_list = ['sequence', 'line', 'bar', 'sequences', 'lines', 'bars', 'scatter', 'area', 'areas', 'pie', 'radar', 'surface']
+    chart_type_list = ['sequence', 'line', 'bar', 'sequences', 'lines', 'bars', 'scatter', 'area', 'areas', 'pie', 'radar', 'surface', 'text', 'gauge']
 
     for chart_obj, key_word, chart_type in zip(chart_obj_list, key_word_list, chart_type_list):
         obj = chart_obj(key_word)

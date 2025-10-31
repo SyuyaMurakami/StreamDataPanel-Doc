@@ -184,11 +184,31 @@ An example is as follows:
     shape = [len(xRange), len(yRange)]
     surface_chart.fresh([axis, shape, zValues])
 
+Text
+~~~~~~~~~~~~~~~~~~~~~~~~
 
+Text is a chart to show frequently freshed strings. You should pass a string to ``fresh`` function.
 
+An example is as follows:
+::
 
+    text_chart.fresh('this is a string which can be updated.')
 
+Gauge
+~~~~~~~~~~~~~~~~~~~~~~~~
 
+Gauge is a chart to show value against its range. You should pass a three-element list to ``fresh`` function.
+
+The first element should be the name of your data series, it is a string.
+
+The second element should be a list which has two number element. It is the range of your data. It is like: ``[min_of_your_data, max_of_your_data]`` .
+
+The third element is the true value of you data, which is a number.
+
+An example is as follows:
+::
+
+    gauge_chart.fresh(['A', [0, 100], 64.8])
 
 
 

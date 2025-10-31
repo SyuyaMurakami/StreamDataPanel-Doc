@@ -6,7 +6,7 @@ import logging
 from typing import Union, Dict, Any, Set, Deque, Callable, Awaitable
 from collections import deque
 from websockets.server import serve, WebSocketServerProtocol
-from websockets.exceptions import ConnectionClosedOK, ConnectionClosedError
+from websockets.exceptions import ConnectionClosedOK, ConnectionClosedError, ConnectionClosed
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -85,7 +85,7 @@ class WebsocketManager:
         
         # Sync/Async communication queue, used to bridge synchronous calls to the asynchronous loop
         self._update_queue: Deque[tuple[str, Dict[str, Any]]] = deque()
-        self._update_event: asyncio.Event = asyncio.Event() # Notifies the async loop that new data is available
+        self._update_event: asyncio.Event = None # Notifies the async loop that new data is available
 
         # Thread Lock
         self._lock = threading.Lock()
@@ -164,7 +164,8 @@ class WebsocketManager:
         try:
             self.loop = asyncio.new_event_loop()
             asyncio.set_event_loop(self.loop)
-            
+            self._update_event = asyncio.Event()
+
             # Start the WebSocket server and data processing task
             self.loop.create_task(self._start_server_and_loop())
             self.loop.run_forever()
@@ -185,7 +186,8 @@ class WebsocketManager:
             return
 
         self._is_running = False
-        self._update_event.set()
+        if self._update_event:
+            self.loop.call_soon_threadsafe(self._update_event.set)
         
         if self.loop and self.loop.is_running():
             future = asyncio.run_coroutine_threadsafe(self._shutdown_async(), self.loop)
@@ -414,6 +416,9 @@ class WebsocketManager:
         """
         try:
             await websocket.send(message) 
+        except ConnectionClosed as e:
+            logger.info(f"WebSocket connection closed (Code {e.code}) during send, marking for cleanup: {e}")
+            disconnected_websockets.add(websocket)
         except Exception as e:
             logger.error(f"Unexpected error during WebSocket send: {e}", exc_info=True)
             disconnected_websockets.add(websocket)

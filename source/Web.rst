@@ -33,6 +33,8 @@ Use ``testSDP`` to run a simple test. A web will be opened automatically. Type o
     surface
     area
     areas
+    text
+    gauge
 
 Then type ``test`` into ``KeyWord`` input. Click ``Subscribe`` to see if it runs correctly. If You see a chart with data freshed every second, it means success.
 
@@ -159,5 +161,7 @@ Shortcut charts are:
     surface
     area
     areas
+    text
+    gauge
 
 
