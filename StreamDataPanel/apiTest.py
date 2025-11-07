@@ -23,8 +23,7 @@ def generate_data(chart_type: str):
     if chart_type in ['sequence', 'line', 'bar']:
         return round(random.uniform(50, 150), 2)
     elif chart_type in ['sequences', 'lines', 'bars']:
-        return {"A": round(random.uniform(50, 150), 2),
-                "B": round(random.uniform(30, 130), 2)}
+        return [["A", "B"], [round(random.uniform(50, 150), 2), round(random.uniform(30, 130), 2)]]
     elif chart_type == 'scatter':
         return [round(random.uniform(50, 150), 2), round(random.uniform(30, 130), 2)]
     elif chart_type == 'area':

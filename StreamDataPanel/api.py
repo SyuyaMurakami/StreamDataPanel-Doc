@@ -362,28 +362,6 @@ class DataStreamValidate(DataStream):
             return False
 
     @staticmethod
-    def _data_validated_dict(data_payload: Any):
-        """
-        _data_validated_dict() is a static method to validate the payload structure 
-        and ensure the 'value' field is a dictionary type.
-
-        Parameters
-        ----------
-        data_payload : Any
-            The data payload to be validated.
-
-        Returns
-        -------
-        bool
-            Returns True if validation passes, otherwise False.
-
-        """      
-        if DataStreamValidate._data_validated(data_payload) and isinstance(data_payload['value'], dict):
-            return True
-        else:
-            return False
-
-    @staticmethod
     def _data_validated_list(data_payload: Any):
         """
         _data_validated_list() is a static method to validate the payload structure 
@@ -648,17 +626,16 @@ class Lines(DataStreamValidate):
     def update(self, data_payload: Dict[str, Any]):
         """
         update() is the data update function for the Lines chart (multiple lines).
-        It validates that the 'value' field in the payload is a dictionary 
-        (containing values for multiple series).
+        It validates that the 'value' field in the payload is a list.
 
         Parameters
         ----------
         data_payload : Dict[str, Any]
             The data payload dictionary. Expected format: 
-            {id:xxx, timestamp:xxx, value:{A:some_number, B:some_number}}
+            {id:xxx, timestamp:xxx, value:[[A, B],[some_number,some_number]]}
 
         """
-        super().update(data_payload, DataStreamValidate._data_validated_dict)
+        super().update(data_payload, DataStreamValidate._data_validated_dimension)
 
 
 class Bars(DataStreamValidate):
@@ -669,17 +646,16 @@ class Bars(DataStreamValidate):
     def update(self, data_payload: Dict[str, Any]):
         """
         update() is the data update function for the Bars chart (multiple bar groups).
-        It validates that the 'value' field in the payload is a dictionary 
-        (containing values for multiple series).
+        It validates that the 'value' field in the payload is a list.
 
         Parameters
         ----------
         data_payload : Dict[str, Any]
             The data payload dictionary. Expected format: 
-            {id:xxx, timestamp:xxx, value:{A:some_number, B:some_number}}
+            {id:xxx, timestamp:xxx, value:[[A, B],[some_number,some_number]]}
 
         """
-        super().update(data_payload, DataStreamValidate._data_validated_dict)
+        super().update(data_payload, DataStreamValidate._data_validated_dimension)
 
 
 class Sequences(DataStreamValidate):
@@ -690,17 +666,16 @@ class Sequences(DataStreamValidate):
     def update(self, data_payload: Dict[str, Any]):
         """
         update() is the data update function for the Sequences chart.
-        It validates that the 'value' field in the payload is a dictionary 
-        (containing values for multiple series).
+        It validates that the 'value' field in the payload is a list.
 
         Parameters
         ----------
         data_payload : Dict[str, Any]
             The data payload dictionary. Expected format: 
-            {id:xxx, timestamp:xxx, value:{A:some_number, B:some_number}}
+            {id:xxx, timestamp:xxx, value:[[A, B],[some_number,some_number]]}
 
         """
-        super().update(data_payload, DataStreamValidate._data_validated_dict)
+        super().update(data_payload, DataStreamValidate._data_validated_dimension)
 
 
 class Scatter(DataStreamValidate):
